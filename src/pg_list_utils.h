@@ -1,11 +1,17 @@
 #pragma once
 
-#include <pg_list.h>
-#include <string_view>
+#include "pg_list.h"
+#include "string_view"
 
 // This option requires usage of compiletime constant string
 #define COPY_STRING
 #undef COPY_STRING
+
+static inline
+const auto* get_name(const ListCell* const listEl)
+{
+	return reinterpret_cast<const Ident*>(listEl->data.ptr_value)->name;
+}
 
 // TODO: move to common, make independent of Ident
 static inline
@@ -69,7 +75,7 @@ const ListCell* list_item(const List& list, unsigned num = 0)
 static inline
 const wchar_t* list_item_name(const List& list, unsigned num = 0)
 {
-	return reinterpret_cast<Ident*>(list_item(list, num)->data.ptr_value)->name;
+	return get_name(list_item(list, num));
 }
 
 struct ListWrapper : public List

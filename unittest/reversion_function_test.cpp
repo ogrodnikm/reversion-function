@@ -10,17 +10,16 @@ class ReversionFunctionTest : public ::testing::Test
 
 public:
 	ReversionFunctionTest() = default;
-	List& buildExampleList()
+	List* buildExampleList()
 	{
 		_list = std::make_unique<ListWrapper>();
 		list_append(*_list, { L"MyApp", L"MyModule", L"MyTable" });
-		return *_list;
+		return _list.get();
 	}
 };
 
 
 TEST_F(ReversionFunctionTest, reversion_function)
 {
-	//List(ListCell(Ident(name:"MyApp"))->ListCell(Ident(name:"MyModule"))->ListCell(Ident(name:"MyTable"))->null)a;
-	//EXPECT_STREQ(L"aaa", reversion_function());
+	EXPECT_STREQ(L"MyTable.MyModule.MyApp", reversion_function(buildExampleList()));
 }
