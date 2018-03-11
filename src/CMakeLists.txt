@@ -1,6 +1,6 @@
 ﻿cmake_minimum_required (VERSION 3.8)
 
-set(SOURCE "reversion_function.cpp" "reversion_function.h")
+set(SOURCE "reversion_function.cpp" "reversion_function.h" "pg_list_utils.h")
 
 add_library(reversion_function ${SOURCE})
 
