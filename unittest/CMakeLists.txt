@@ -15,7 +15,7 @@ execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
 execute_process(COMMAND "${CMAKE_COMMAND}" --build .
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/googletest-download" )
 
-	# Prevent overriding the parent project's compiler/linker
+# Prevent overriding the parent project's compiler/linker
 # settings on Windows
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
