@@ -1,5 +1,6 @@
 #include "pg_list_adapter.h"
 #include "pg_list_utils.h"
+#include "reversion_function_impl.h"
 #include "gtest/gtest.h"
 #include <memory>
 
@@ -25,9 +26,9 @@ TEST_F(PgListAdapterTest, get_string)
 	EXPECT_STREQ(L"MyApp", PgListAdapter::get_string(*p_adapter->begin()));
 }
 
-TEST_F(PgListAdapterTest, value_type)
+TEST_F(PgListAdapterTest, get_char_t)
 {
-	static_assert(std::is_same<PgListAdapter::value_type, wchar_t>::value, 
+	static_assert(std::is_same_v<get_char_t_<PgListAdapter>, wchar_t>, 
 		"adapter value type is not same as pg_list character type");
 }
 

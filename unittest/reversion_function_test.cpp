@@ -10,14 +10,12 @@ public:
 	ReversionFunctionTest() = default;
 };
 
-
 TEST_F(ReversionFunctionTest, example)
 {
 	ListWrapper list;
 	list_append(list, { L"MyApp", L"MyModule", L"MyTable" });
 	EXPECT_STREQ(L"MyTable.MyModule.MyApp", reversion_function(&list));
 }
-
 
 TEST_F(ReversionFunctionTest, long_list)
 {

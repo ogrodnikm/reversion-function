@@ -8,8 +8,7 @@ class PgListAdapter
 	const List* _list;
 
 public:
-	using value_type = wchar_t;
-	using string_type = const value_type*;
+	using value_type = const wchar_t*;
 
 public:
 	PgListAdapter(const List* list) : _list(list) {}
@@ -64,7 +63,7 @@ public:
 
 	// There is no need go get_string to be there - string extraction could have been resolved on iterator level, 
 	// but this feels like a cleaner solution
-	static string_type get_string(const ListCell& cell) { return reinterpret_cast<const Ident*>(cell.data.ptr_value)->name; }
+	static value_type get_string(const ListCell& cell) { return reinterpret_cast<const Ident*>(cell.data.ptr_value)->name; }
 
 	iterator begin() const { return _list->head; }
 	iterator end() const { return nullptr; }
