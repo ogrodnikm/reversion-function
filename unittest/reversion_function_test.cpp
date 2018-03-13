@@ -6,20 +6,40 @@
 
 class ReversionFunctionTest : public ::testing::Test
 {
-	std::unique_ptr<ListWrapper> _list;
-
 public:
 	ReversionFunctionTest() = default;
-	List* buildExampleList()
-	{
-		_list = std::make_unique<ListWrapper>();
-		list_append(*_list, { L"MyApp", L"MyModule", L"MyTable" });
-		return _list.get();
-	}
 };
 
 
-TEST_F(ReversionFunctionTest, reversion_function)
+TEST_F(ReversionFunctionTest, example)
 {
-	EXPECT_STREQ(L"MyTable.MyModule.MyApp", reversion_function(buildExampleList()));
+	ListWrapper list;
+	list_append(list, { L"MyApp", L"MyModule", L"MyTable" });
+	EXPECT_STREQ(L"MyTable.MyModule.MyApp", reversion_function(&list));
 }
+
+
+TEST_F(ReversionFunctionTest, long_list)
+{
+	ListWrapper list;
+	std::wstring expected;
+	for (auto i = 0; i < 100; ++i) {
+		list_append(list, { L"MyApp", L"MyModule", L"MyTable" });
+		expected += L"MyTable.MyModule.MyApp.";
+	}
+	expected.pop_back();
+	EXPECT_STREQ(expected.c_str(), reversion_function(&list));
+}
+
+TEST_F(ReversionFunctionTest, very_long_list)
+{
+	ListWrapper list;
+	std::wstring expected;
+	for (auto i = 0; i < 1000000; ++i) {
+		list_append(list, { L"MyApp", L"MyModule", L"MyTable" });
+		expected += L"MyTable.MyModule.MyApp.";
+	}
+	expected.pop_back();
+	EXPECT_STREQ(expected.c_str(), reversion_function(&list));
+}
+
