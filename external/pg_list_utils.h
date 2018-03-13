@@ -74,6 +74,19 @@ const wchar_t* list_item_name(const List& list, unsigned num = 0)
 	return get_name(list_item(list, num));
 }
 
+static inline
+void list_reverse(List& list)
+{
+	ListCell* old_tail = list.tail;
+	while (list.head != old_tail)
+	{
+		ListCell* moved = list.head;
+		list.head = moved->next;
+		moved->next = old_tail->next;
+		old_tail->next = moved;
+	}
+}
+
 struct ListWrapper : public List
 {
 	ListWrapper() : List({}) {}

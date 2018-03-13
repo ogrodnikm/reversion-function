@@ -17,3 +17,18 @@ TEST(pg_list, list_append)
 	EXPECT_STREQ(L"MyTable", list_item_name(list, 2));
 }
 
+TEST(pg_list, list_reverse)
+{
+	ListWrapper list;
+	list_append(list, { L"1", L"2", L"3", L"4" });
+	EXPECT_STREQ(L"1", list_item_name(list, 0));
+	EXPECT_STREQ(L"2", list_item_name(list, 1));
+	EXPECT_STREQ(L"3", list_item_name(list, 2));
+	EXPECT_STREQ(L"4", list_item_name(list, 3));
+	list_reverse(list);
+	EXPECT_STREQ(L"4", list_item_name(list, 0));
+	EXPECT_STREQ(L"3", list_item_name(list, 1));
+	EXPECT_STREQ(L"2", list_item_name(list, 2));
+	EXPECT_STREQ(L"1", list_item_name(list, 3));
+}
+
