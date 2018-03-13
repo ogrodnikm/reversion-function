@@ -3,6 +3,13 @@
 #include "pg_list.h"
 #include <iterator>
 
+// There is no need go get_string to be there - string extraction could have been resolved on iterator level, 
+// but this feels like a cleaner solution
+static inline const wchar_t* get_string(const ListCell& cell)
+{ 
+	return reinterpret_cast<const Ident*>(cell.data.ptr_value)->name; 
+}
+
 class PgListAdapter
 {
 	const List* _list;
@@ -60,10 +67,6 @@ public:
 	private:
 		pointer _ptr;
 	};
-
-	// There is no need go get_string to be there - string extraction could have been resolved on iterator level, 
-	// but this feels like a cleaner solution
-	static value_type get_string(const ListCell& cell) { return reinterpret_cast<const Ident*>(cell.data.ptr_value)->name; }
 
 	iterator begin() const { return _list->head; }
 	iterator end() const { return nullptr; }

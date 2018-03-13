@@ -23,7 +23,7 @@ public:
 TEST_F(PgListAdapterTest, get_string)
 {
 	auto p_adapter = build_example_list_adapter();
-	EXPECT_STREQ(L"MyApp", PgListAdapter::get_string(*p_adapter->begin()));
+	EXPECT_STREQ(L"MyApp", get_string(*p_adapter->begin()));
 }
 
 TEST_F(PgListAdapterTest, get_char_t)

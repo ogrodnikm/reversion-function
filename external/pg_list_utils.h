@@ -13,7 +13,6 @@ const auto* get_name(const ListCell* const listEl)
 	return reinterpret_cast<const Ident*>(listEl->data.ptr_value)->name;
 }
 
-// TODO: move to common, make independent of Ident
 static inline
 void list_clear(List& list)
 {
@@ -33,8 +32,6 @@ void list_clear(List& list)
 	list.tail = nullptr;
 }
 
-//template<typename Iterable>
-// TODO: template
 static inline
 void list_append(List& list, const std::initializer_list<std::wstring_view>& items)
 {
@@ -62,7 +59,6 @@ void list_append(List& list, const std::initializer_list<std::wstring_view>& ite
 	}
 }
 
-// TODO: operator[]
 static inline
 const ListCell* list_item(const List& list, unsigned num = 0)
 {
