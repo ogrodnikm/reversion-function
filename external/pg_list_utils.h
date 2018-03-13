@@ -5,7 +5,7 @@
 
 // This option requires usage of compiletime constant string
 #define COPY_STRING
-#undef COPY_STRING
+//#undef COPY_STRING
 
 static inline
 const auto* get_name(const ListCell* const listEl)

@@ -4,7 +4,7 @@ add_executable(Test "reversion_function_test.cpp" "reversion_function_impl_test.
                     "pg_list_utils_test.cpp" "pg_list_adapter_test.cpp")
 target_link_libraries(Test reversion_function gtest_main)
 
-add_test (NAME MyTest COMMAND Test)
+add_test(NAME MyTest COMMAND Test)
 
 
 
