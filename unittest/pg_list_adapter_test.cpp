@@ -28,7 +28,7 @@ TEST_F(PgListAdapterTest, get_string)
 
 TEST_F(PgListAdapterTest, get_char_t)
 {
-	static_assert(std::is_same_v<get_char_t_<PgListAdapter>, wchar_t>, 
+	static_assert(std::is_same_v<get_char_t<PgListAdapter>, wchar_t>, 
 		"adapter value type is not same as pg_list character type");
 }
 
