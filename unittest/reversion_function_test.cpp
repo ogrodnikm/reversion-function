@@ -10,6 +10,12 @@ public:
 	ReversionFunctionTest() = default;
 };
 
+TEST_F(ReversionFunctionTest, empty)
+{
+	ListWrapper list;
+	EXPECT_STREQ(L"", reversion_function(&list));
+}
+
 TEST_F(ReversionFunctionTest, example)
 {
 	ListWrapper list;
