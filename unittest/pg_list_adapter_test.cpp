@@ -1,7 +1,7 @@
-#include "pg_list_adapter.h"
+#include "gtest/gtest.h"
+#include "adapters/pg_list_adapter.h"
 #include "pg_list_utils.h"
 #include "reversion_function_impl.h"
-#include "gtest/gtest.h"
 #include <memory>
 
 
