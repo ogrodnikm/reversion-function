@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.0)
 
 add_executable(Test "reversion_function_test.cpp" "reversion_function_impl_test.cpp" 
                     "pg_list_utils_test.cpp" "pg_list_adapter_test.cpp")
