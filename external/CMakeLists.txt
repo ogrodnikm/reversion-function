@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.0)
+﻿cmake_minimum_required (VERSION 3.8)
 
 # Add this to project as header only library
 add_library(pg_list INTERFACE)

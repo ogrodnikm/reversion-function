@@ -23,7 +23,7 @@ void list_clear(List& list)
 #ifdef COPY_STRING
 		delete[] reinterpret_cast<Ident*>(current->data.ptr_value)->name;
 #endif
-		delete current->data.ptr_value;
+		delete reinterpret_cast<Ident*>(current->data.ptr_value);
 		delete current;
 		current = next;
 	}
