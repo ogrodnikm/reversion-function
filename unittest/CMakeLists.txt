@@ -6,3 +6,7 @@ target_link_libraries(Test reversion_function gtest_main)
 
 add_test(NAME MyTest COMMAND Test)
 
+install(TARGETS Test
+    RUNTIME DESTINATION "test"
+    ARCHIVE DESTINATION "test"
+    LIBRARY DESTINATION "lib")

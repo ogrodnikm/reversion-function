@@ -9,16 +9,17 @@ set(CMAKE_CXX_STANDARD 17)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 	# This should supress warning, but I don't like setting this globally - need to investigate further
-	set(CMAKE_CXX_FLAGS "-D_SCL_SECURE_NO_WARNINGS")
+	add_compile_options("-D_SCL_SECURE_NO_WARNINGS")
 endif()
 
 add_subdirectory("external")
 add_subdirectory("prototype")
 add_subdirectory("src")
 add_subdirectory("unittest")
+
 enable_testing()
 
-# Download and unpack googletest at configure time
+message("Download and unpack googletest at configure time")
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/googletest-download" )
@@ -34,11 +35,3 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src
                  ${CMAKE_BINARY_DIR}/googletest-build
                  EXCLUDE_FROM_ALL)
-
-# The gtest/gtest_main targets carry header search path
-# dependencies automatically when using CMake 2.8.11 or
-# later. Otherwise we have to add them here ourselves.
-if (CMAKE_VERSION VERSION_LESS 2.8.11)
-  include_directories("${gtest_SOURCE_DIR}/include")
-endif()
-
