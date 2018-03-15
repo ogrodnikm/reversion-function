@@ -17,31 +17,31 @@ template<typename Container>
 using is_bidirectional_container = std::is_base_of<std::bidirectional_iterator_tag, typename Container::iterator::iterator_category>;
 
 template<typename T>
-static inline auto& get_string(const T& s)
+static inline const auto& get_string(const T& s) noexcept
 {
 	return s;
 }
 
 template<typename CharT>
-static inline auto build_string_view(const std::basic_string_view<CharT>& str)
+static inline auto build_string_view(const std::basic_string_view<CharT>& str) noexcept
 {
 	return str;
 }
 
 template<typename CharT>
-static inline auto build_string_view(const std::basic_string<CharT>& str)
+static inline auto build_string_view(const std::basic_string<CharT>& str) noexcept
 {
 	return std::basic_string_view<CharT>(str.c_str(), str.size());
 }
 
 template<typename CharT>
-static inline auto build_string_view(const CharT* str)
+static inline auto build_string_view(const CharT* str) noexcept
 {
 	return std::basic_string_view<CharT>(str);
 }
 
 template<typename CharT>
-static inline auto copy_string_to_buffer(const CharT* ch, CharT* buffer)
+static inline auto copy_string_to_buffer(const CharT* ch, CharT* buffer) noexcept
 {
 	while (*ch) {
 		*buffer++ = *ch++;
@@ -65,7 +65,7 @@ static inline auto copy_string_to_buffer(const std::basic_string<CharT>& string,
 }
 
 template<typename CharT>
-static inline void set_last_buffer_value(CharT* buffer)
+static inline void set_last_buffer_value(CharT* buffer) noexcept
 {
 	*buffer = 0;
 }

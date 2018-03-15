@@ -19,16 +19,16 @@ public:
 	using difference_type = std::ptrdiff_t;
 	using iterator_category = std::forward_iterator_tag;
 
-	list_iterator(pointer ptr = nullptr) : _ptr(ptr) {}
-	list_iterator(const self_type& it) : _ptr(it._ptr) {}
-	list_iterator& operator=(const self_type& it) { _ptr = it._ptr; }
+	list_iterator(pointer ptr = nullptr) noexcept : _ptr(ptr) {}
+	list_iterator(const self_type& it) noexcept : _ptr(it._ptr) {}
+	list_iterator& operator=(const self_type& it) noexcept { _ptr = it._ptr; }
 
-	reference operator*() { return *_ptr; }
-	pointer operator->() { return _ptr; }
-	bool operator==(const self_type& rhs) { return _ptr == rhs._ptr; }
-	bool operator!=(const self_type& rhs) { return _ptr != rhs._ptr; }
+	reference operator*() noexcept { return *_ptr; }
+	pointer operator->() noexcept { return _ptr; }
+	bool operator==(const self_type& rhs) noexcept { return _ptr == rhs._ptr; }
+	bool operator!=(const self_type& rhs) noexcept { return _ptr != rhs._ptr; }
 
-	self_type& operator++()
+	self_type& operator++() noexcept
 	{
 		_ptr = _ptr->next;
 		return *this;
@@ -36,19 +36,19 @@ public:
 
 	/* Those functions are not required in adapter implementation
 
-	self_type operator++(int) {
+	self_type operator++(int) noexcept {
 		self_type result(*this);
 		_ptr = _ptr->next;
 		return result;
 	}
 
-	self_type operator+(difference_type num) const {
+	self_type operator+(difference_type num) const noexcept {
 		self_type new_it(*this);
 		new_it += num;
 		return new_it;
 	}
 
-	self_type& operator+=(difference_type num) {
+	self_type& operator+=(difference_type num) noexcept {
 		// warning O(n) complexity
 		for (auto i = 0u; i < num; ++i)
 			_ptr = _ptr->next;
@@ -60,7 +60,7 @@ private:
 };
 
 /**
-* Base class for PgListAdapter. Provides C++ light container wrapper over C-style pg list to 
+* Base class for PgListAdapter. Provides C++ light container wrapper over C-style pg list to
 * facilitatie it for reversion_function algorithm.
 */
 class PgListAdapterBase
@@ -70,11 +70,11 @@ public:
 	using iterator = list_iterator<ListCell>;
 	using const_iterator = list_iterator<const ListCell>;
 
-	PgListAdapterBase(List* list) : _list(list) {}
+	PgListAdapterBase(List* list) noexcept : _list(list) {}
 
-	std::size_t size() const { return _list->length; }
-	const_iterator begin() const { return _list->head; }
-	const_iterator end() const { return nullptr; }
+	std::size_t size() const noexcept { return _list->length; }
+	const_iterator begin() const noexcept { return _list->head; }
+	const_iterator end() const noexcept { return nullptr; }
 
 protected:
 	List * _list;
@@ -87,7 +87,7 @@ struct PgListConstAdapter : PgListAdapterBase
 {
 	using iterator = const_iterator;
 
-	PgListConstAdapter(const List* list) : PgListAdapterBase(const_cast<List*>(list)) {}
+	PgListConstAdapter(const List* list) noexcept : PgListAdapterBase(const_cast<List*>(list)) {}
 };
 
 /**
@@ -95,9 +95,9 @@ struct PgListConstAdapter : PgListAdapterBase
 */
 struct PgListAdapter : PgListAdapterBase
 {
-	PgListAdapter(List* list) : PgListAdapterBase(list) {}
+	PgListAdapter(List* list) noexcept : PgListAdapterBase(list) {}
 
-	void reverse()
+	void reverse() noexcept
 	{
 		ListCell* old_tail = _list->tail;
 		while (_list->head != old_tail)
@@ -114,7 +114,7 @@ struct PgListAdapter : PgListAdapterBase
 /**
 * Provides way to retrieve string from value returned by pg_list_iterator.
 */
-static inline const wchar_t* get_string(const ListCell& cell)
+static inline const wchar_t* get_string(const ListCell& cell) noexcept
 {
 	return reinterpret_cast<const Ident*>(cell.data.ptr_value)->name;
 }

@@ -40,5 +40,3 @@ TEST_F(PgListAdapterTest, loop)
 		++count;
 	EXPECT_EQ(p_adapter->size(), count);
 }
-
-
