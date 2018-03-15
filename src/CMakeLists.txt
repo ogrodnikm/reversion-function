@@ -13,3 +13,4 @@ install(TARGETS reversion_function
     LIBRARY DESTINATION "lib")
 
 install(FILES "reversion_function.h" "reversion_function_impl.h" DESTINATION "include")
+install(DIRECTORY "adapters" DESTINATION "include")
