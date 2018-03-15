@@ -12,6 +12,11 @@ MyTable.MyModule.MyApp
 
 Compatible with Visual Studio 2017 and CMake.
 
+Tested under:
+* Windows (MSVC-1912)
+* Linux (gcc-7)
+* Linux (clang-6)
+
 Solution has been generalized to provide support for number of possible input containers and string types as depicted in
 unittest/reversion_function_impl_test.cpp
 
