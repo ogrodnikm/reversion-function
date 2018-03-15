@@ -13,13 +13,13 @@ public:
 
 TEST_F(GeneralizedReversionFunctionTest, v_p_wchar_t)
 {
-	std::vector<wchar_t*> v_char = { L"MyApp", L"MyModule", L"MyTable" };
+	std::vector<const wchar_t*> v_char = { L"MyApp", L"MyModule", L"MyTable" };
 	EXPECT_STREQ(L"MyTable.MyModule.MyApp", reversion_function(v_char));
 }
 
 TEST_F(GeneralizedReversionFunctionTest, v_p_char)
 {
-	std::vector<char*> v_char = { "MyApp", "MyModule", "MyTable" };
+	std::vector<const char*> v_char = { "MyApp", "MyModule", "MyTable" };
 	EXPECT_STREQ("MyTable.MyModule.MyApp", reversion_function(v_char));
 }
 
