@@ -3,7 +3,9 @@
 
 #include "nodes.h"
 
+#ifndef NULL
 #define NULL 0
+#endif
 
 typedef struct ListCell ListCell;
 
